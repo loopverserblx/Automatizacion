@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos de Éxito | AutoFlow TikTok</title>
+    
+    <meta name="description" content="Resultados reales de la automatización n8n en TikTok. Vistas millonarias y ahorro de tiempo documentado.">
+    
+    <style>
+        :root {
+            --primary: #fe2c55; /* TikTok Red */
+            --secondary: #25f4ee; /* TikTok Cyan */
+            --bg-dark: #0a0a0b;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #f1f1f1;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glow: 0 0 25px rgba(254, 44, 85, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Inter', system-ui, sans-serif; 
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* HEADER (REPLICADO EXACTO) */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-weight: 900; font-size: 1.6rem; letter-spacing: -1.5px; }
+        .logo span { color: var(--primary); text-shadow: var(--glow); }
+        nav a { color: #aaa; text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: 0.3s; font-weight: 500; }
+        nav a:hover { color: var(--secondary); }
+
+        /* HERO DE CASOS: DINAMISMO BRUTAL */
+        .hero-cases {
+            min-height: 70vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 150px 5% 50px;
+            background: radial-gradient(circle at 50% 50%, rgba(254, 44, 85, 0.1) 0%, transparent 70%);
+        }
+        .hero-cases h1 {
+            font-size: clamp(3rem, 10vw, 6.5rem);
+            font-weight: 900; letter-spacing: -4px; line-height: 0.9;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom, #fff, #666);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* SECCIÓN DE RESULTADOS VISUALES */
+        .showcase-grid {
+            max-width: 1300px; margin: 50px auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px; padding: 0 5%;
+        }
+
+        /* MOCKUP DE TIKTOK (RESULTADO FINAL) */
+        .phone-mockup {
+            background: #000;
+            width: 300px; height: 600px;
+            border: 12px solid #1a1a1a;
+            border-radius: 45px;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8), var(--glow);
+        }
+        .phone-content {
+            height: 100%; width: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 40%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23111"/><text x="10" y="50" fill="%23333" font-size="5">SIMULATED FEED</text></svg>');
+            background-size: cover;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 20px;
+        }
+        .tiktok-overlay { font-size: 0.8rem; color: #fff; }
+        .tiktok-bar { width: 4px; height: 100px; background: linear-gradient(to bottom, var(--primary), var(--secondary)); position: absolute; right: 15px; bottom: 150px; border-radius: 10px; }
+
+        /* CARDS DE DATOS DUROS */
+        .case-details {
+            padding: 40px; background: var(--glass);
+            border-radius: 35px; border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s;
+        }
+        .case-details:hover { transform: translateY(-10px); border-color: var(--secondary); }
+        .case-label { color: var(--primary); font-weight: 900; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        .case-title { font-size: 2rem; font-weight: 800; margin: 10px 0; color: #fff; }
+        .case-stats { display: flex; gap: 30px; margin-top: 25px; }
+        .stat-box { display: flex; flex-direction: column; }
+        .stat-val { font-size: 1.8rem; font-weight: 900; color: var(--secondary); }
+        .stat-tag { font-size: 0.7rem; color: #666; font-weight: 700; }
+
+        /* FOOTER (REPLICADO EXACTO) */
+        footer {
+            padding: 100px 5% 50px; background: #050506;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px;
+        }
+        .footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 20px; }
+        footer h5 { color: var(--secondary); margin-bottom: 20px; font-size: 1rem; }
+        footer ul { list-style: none; }
+        footer ul li { margin-bottom: 10px; }
+        footer a { color: #666; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        footer a:hover { color: #fff; }
+
+        /* ANIMACIÓN DE PULSO PARA EL RESULTADO */
+        .recording-dot {
+            width: 10px; height: 10px; background: red; border-radius: 50%;
+            display: inline-block; margin-right: 5px; animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .showcase-grid { grid-template-columns: 1fr; }
+            footer { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">AUTO<span>FLOW</span></div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#servicios">Sistemas</a>
+            <a href="casos-exito.html" style="color: var(--secondary);">Casos de Éxito</a>
+            <a href="index.html#blog">Blog</a>
+        </nav>
+        <a href="index.html#planes" class="cta-main" style="padding: 10px 25px; font-size: 0.8rem; background: var(--primary); color: white; border-radius: 15px; text-decoration: none; font-weight: 800;">Suscripción</a>
+    </header>
+
+    <section class="hero-cases">
+        <div style="margin-bottom: 20px;"><span class="recording-dot"></span> <span style="font-weight: 800; font-size: 0.8rem; letter-spacing: 2px;">LIVE RESULTS 2026</span></div>
+        <h1>Pruebas de<br>Dominio Real.</h1>
+        <p style="color: #888; max-width: 700px; font-size: 1.2rem;">No teorizamos sobre el algoritmo. Lo hackeamos con n8n. Aquí tienes la trazabilidad de canales que pasaron de 0 a la monetización en tiempo récord.</p>
+    </section>
+
+    <!-- CASO 1: E-COMMERCE -->
+    <div class="showcase-grid">
+        <div class="case-visual">
+            <div class="phone-mockup">
+                <div class="phone-content" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=500&q=80');">
+                    <div class="tiktok-overlay">
+                        <p style="font-weight: 900;">@FashionGlow_AI</p>
+                        <p style="font-size: 0.7rem; opacity: 0.8;">Nuevo drop automatizado con n8n #AI #Fashion</p>
+                    </div>
+                    <div class="tiktok-bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="case-details">
+            <span class="case-label">Vertical: E-commerce Moda</span>
+            <h2 class="case-title">Aumento de Ventas Directas TikTok Shop</h2>
+            <p style="color: #777; margin-bottom: 20px;">Integramos su inventario de WooCommerce con nuestro n8n Workflow. El sistema detecta nuevos productos y genera automáticamente un vídeo "Unboxing IA" con voz humana y música de tendencia.</p>
+            <div class="case-stats">
+                <div class="stat-box">
+                    <span class="stat-val">+1.4M</span>
+                    <span class="stat-tag">Vistas Totales</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val">96%</span>
+                    <span class="stat-tag">ROI en 30 días</span>
+                </div>
+            </div>
+            <div style="margin-top: 30px; padding: 20px; background: rgba(37, 244, 238, 0.05); border-radius: 15px; font-size: 0.85rem; border-left: 3px solid var(--secondary);">
+                "Antes tardábamos 4 horas por vídeo. Ahora AutoFlow publica 3 al día mientras dormimos." - CEO GlowFashion
+            </div>
+        </div>
+    </div>
+
+    <!-- CASO 2: FACELESS CHANNEL -->
+    <div class="showcase-grid" style="direction: rtl;">
+        <div class="case-visual" style="direction: ltr;">
+            <div class="phone-mockup" style="border-color: #222;">
+                <div class="phone-content" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1611974717483-580857319645?auto=format&fit=crop&w=500&q=80');">
+                    <div class="tiktok-overlay">
+                        <p style="font-weight: 900;">@FinancialHacks_AI</p>
+                        <p style="font-size: 0.7rem; opacity: 0.8;">3 Trucos para escalar tu ahorro #Money #Faceless</p>
+                    </div>
+                    <div class="tiktok-bar" style="background: var(--secondary);"></div>
+                </div>
+            </div>
+        </div>
+        <div class="case-details" style="direction: ltr;">
+            <span class="case-label">Vertical: Educación Finanzas</span>
+            <h2 class="case-title">Canal 100% Autónomo (Faceless)</h2>
+            <p style="color: #777; margin-bottom: 20px;">Este cliente quería un canal de noticias financieras pero no tenía tiempo para grabar. n8n lee las noticias de Google News, GPT-4o resume y AutoFlow publica el vídeo con un avatar cinemático.</p>
+            <div class="case-stats">
+                <div class="stat-box">
+                    <span class="stat-val">85K</span>
+                    <span class="stat-tag">Seguidores</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-val">0h</span>
+                    <span class="stat-tag">Intervención Humana</span>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-weight: 700; color: var(--primary);">Resultado: Cuenta verificada y aprobada para el Creator Rewards Program.</p>
+        </div>
+    </div>
+
+    <section style="text-align: center; padding: 100px 5%;">
+        <h2 style="font-size: 3rem; font-weight: 900; letter-spacing: -2px;">¿Quieres estos resultados?</h2>
+        <p style="color: #666; margin-bottom: 40px;">Tu competencia sigue editando a mano. Tú puedes tener un ejército digital.</p>
+        <a href="index.html#planes" class="cta-main" style="padding: 20px 50px; background: var(--primary); color: white; border-radius: 15px; text-decoration: none; font-weight: 800; display: inline-block; font-size: 1.2rem; box-shadow: var(--glow);">Empezar mi Automatización</a>
+    </section>
+
+    <footer>
+        <div>
+            <div class="footer-logo">AUTO<span>FLOW</span></div>
+            <p style="color: #555; font-size: 0.8rem;">Líderes en automatización de sistemas de atención y medios. Construyendo el futuro de la economía de creadores.</p>
+        </div>
+        <div>
+            <h5>Soluciones</h5>
+            <ul>
+                <li><a href="#">Automatización B2B</a></li>
+                <li><a href="#">Canales Faceless</a></li>
+                <li><a href="#">API Direct Post</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5>Recursos</h5>
+            <ul>
+                <li><a href="#">Documentación n8n</a></li>
+                <li><a href="#">Blog de IA</a></li>
+                <li><a href="#">Casos de Éxito</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5>Legal</h5>
+            <ul>
+                <li><a href="#">Términos de Servicio</a></li>
+                <li><a href="#">Protección de Datos</a></li>
+                <li><a href="#">Política de Cookies</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Animaciones suaves de entrada
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.case-details, .phone-mockup').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(40px)";
+            el.style.transition = "1s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
