@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas de Automatización | AutoFlow TikTok</title>
+    
+    <meta name="description" content="Detalle técnico de nuestros flujos n8n para TikTok. Automatización de vídeo, IA generativa y despliegue escalable.">
+    
+    <style>
+        :root {
+            --primary: #fe2c55;
+            --secondary: #25f4ee;
+            --bg-dark: #0a0a0b;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #f1f1f1;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glow: 0 0 25px rgba(254, 44, 85, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Inter', system-ui, sans-serif; 
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* HEADER (REUTILIZADO) */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-weight: 900; font-size: 1.6rem; letter-spacing: -1.5px; }
+        .logo span { color: var(--primary); text-shadow: var(--glow); }
+        nav a { color: #aaa; text-decoration: none; margin: 0 15px; font-size: 0.9rem; transition: 0.3s; font-weight: 500; }
+        nav a:hover { color: var(--secondary); }
+        .cta-main {
+            padding: 10px 25px; background: var(--primary); color: white; border-radius: 12px;
+            font-weight: 800; text-decoration: none; font-size: 0.8rem; box-shadow: var(--glow); transition: 0.3s;
+        }
+        .cta-main:hover { transform: scale(1.05); }
+
+        /* HERO SECCIÓN SISTEMAS */
+        .hero-systems {
+            padding: 180px 5% 100px;
+            text-align: center;
+            background: radial-gradient(circle at top right, rgba(254, 44, 85, 0.1), transparent 50%);
+        }
+        .hero-systems h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900; letter-spacing: -3px; line-height: 1;
+            margin-bottom: 20px;
+        }
+        .hero-systems p { color: #888; max-width: 800px; margin: 0 auto 40px; font-size: 1.1rem; }
+
+        /* ARQUITECTURA TÉCNICA (DETALLE N8N) */
+        .tech-section { padding: 80px 5%; max-width: 1200px; margin: auto; }
+        .tech-grid {
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center;
+        }
+        .tech-info h2 { font-size: 2.5rem; margin-bottom: 20px; letter-spacing: -1px; }
+        .tech-info p { color: #999; margin-bottom: 30px; font-size: 1.05rem; }
+        
+        .nodes-visual {
+            background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 30px; padding: 40px; position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+        .node-box {
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px; border-radius: 15px; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 15px; transition: 0.3s;
+        }
+        .node-box:hover { border-color: var(--secondary); transform: translateX(10px); }
+        .node-icon { width: 40px; height: 40px; background: #222; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: var(--secondary); }
+
+        /* COMPONENTES DEL FLUJO */
+        .flow-details {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; margin-top: 80px;
+        }
+        .detail-card {
+            padding: 40px; background: #111; border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .detail-card h3 { color: var(--secondary); margin-bottom: 15px; }
+        .detail-card ul { list-style: none; color: #777; font-size: 0.9rem; }
+        .detail-card ul li { margin-bottom: 8px; position: relative; padding-left: 20px; }
+        .detail-card ul li::before { content: "→"; position: absolute; left: 0; color: var(--primary); }
+
+        /* INTEGRACIÓN WOOCOMMERCE */
+        .integration-section {
+            background: #0d0d0f; padding: 100px 5%; margin: 80px 0;
+            text-align: center; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .code-window {
+            max-width: 800px; margin: 40px auto; background: #000;
+            border-radius: 15px; border: 1px solid #333; overflow: hidden;
+            text-align: left; font-family: 'Courier New', monospace; font-size: 0.9rem;
+        }
+        .code-header { background: #1a1a1a; padding: 10px 20px; border-bottom: 1px solid #333; display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .code-content { padding: 30px; color: #88ee88; }
+
+        /* FOOTER (REUTILIZADO) */
+        footer {
+            padding: 100px 5% 50px; background: #050506;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px;
+        }
+        .footer-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 20px; }
+        footer h5 { color: var(--secondary); margin-bottom: 20px; font-size: 1rem; }
+        footer ul { list-style: none; }
+        footer ul li { margin-bottom: 10px; }
+        footer a { color: #666; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        footer a:hover { color: #fff; }
+
+        @media (max-width: 768px) {
+            .tech-grid { grid-template-columns: 1fr; }
+            footer { grid-template-columns: 1fr; text-align: center; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">AUTO<span>FLOW</span></div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="#arquitectura">Arquitectura</a>
+            <a href="#integracion">WooCommerce</a>
+            <a href="index.html#blog">Blog</a>
+        </nav>
+        <a href="index.html#planes" class="cta-main">Contratar Sistema</a>
+    </header>
+
+    <section class="hero-systems">
+        <h1>Ingeniería de Flujos</h1>
+        <p>No vendemos vídeos, vendemos infraestructuras de contenido autónomas. Descubre cómo n8n se convierte en el director creativo de tu canal de TikTok.</p>
+        <div class="trust-bar" style="border:none; opacity: 0.8; filter: none;">
+            <span>NODE-BASED <b>AUTOMATION</b></span>
+            <span style="margin-left: 30px;">REAL-TIME <b>API V3</b></span>
+        </div>
+    </section>
+
+    <section class="tech-section" id="arquitectura">
+        <div class="tech-grid">
+            <div class="tech-info">
+                <h2>El Motor n8n</h2>
+                <p>Nuestra implementación de n8n no se limita a tareas simples. Hemos diseñado un sistema de ramificación lógica que evalúa el rendimiento de vídeos anteriores para ajustar el tono del siguiente guion.</p>
+                <div class="detail-card" style="background: transparent; border: 1px solid var(--secondary); padding: 25px;">
+                    <h4 style="color: #fff; margin-bottom: 10px;">Lógica de Nodos Primarios:</h4>
+                    <ul>
+                        <li>Extracción de Keywords vía GPT-4o.</li>
+                        <li>Sincronización de audio con ElevenLabs API.</li>
+                        <li>Composición visual en servidores Headless.</li>
+                        <li>Programación inteligente según franja horaria.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nodes-visual">
+                <div class="node-box">
+                    <div class="node-icon">W</div>
+                    <div>
+                        <strong style="display:block">Webhook Receiver</strong>
+                        <small style="color:#666">Recibe la orden desde WordPress</small>
+                    </div>
+                </div>
+                <div class="node-box">
+                    <div class="node-icon" style="color:var(--primary)">AI</div>
+                    <div>
+                        <strong style="display:block">Creative Brain</strong>
+                        <small style="color:#666">Generación de guion y estructura viral</small>
+                    </div>
+                </div>
+                <div class="node-box">
+                    <div class="node-icon">V</div>
+                    <div>
+                        <strong style="display:block">Voice & Media Synth</strong>
+                        <small style="color:#666">Renderizado de audio y vídeo</small>
+                    </div>
+                </div>
+                <div class="node-box" style="margin-bottom:0; border-color: var(--secondary);">
+                    <div class="node-icon" style="background: var(--secondary); color:#000">T</div>
+                    <div>
+                        <strong style="display:block">TikTok API Deploy</strong>
+                        <small style="color:#666">Publicación directa al canal</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flow-details">
+            <div class="detail-card">
+                <h3>Escalabilidad</h3>
+                <p>Nuestra infraestructura permite gestionar hasta 50 canales de TikTok simultáneos desde una sola instancia de n8n optimizada.</p>
+            </div>
+            <div class="detail-card">
+                <h3>Seguridad API</h3>
+                <p>Usamos el flujo Oauth2 oficial de TikTok for Developers. Tu cuenta está segura, sin necesidad de compartir contraseñas.</p>
+            </div>
+            <div class="detail-card">
+                <h3>SEO Metadata</h3>
+                <p>Cada vídeo se publica con metadatos incrustados (Alt-text, Captions, Hashtags dinámicos) generados por el sistema.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="integration-section" id="integracion">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Conexión WooCommerce</h2>
+        <p style="color: #888;">Así se comunica tu tienda con nuestro cerebro digital.</p>
+        
+        <div class="code-window">
+            <div class="code-header">
+                <div class="dot" style="background: #ff5f56;"></div>
+                <div class="dot" style="background: #ffbd2e;"></div>
+                <div class="dot" style="background: #27c93f;"></div>
+                <span style="color: #555; font-size: 0.7rem; margin-left: 10px;">webhook-integration.json</span>
+            </div>
+            <div class="code-content">
+<pre>
+{
+  "action": "generate_tiktok",
+  "data": {
+    "product_id": "882",
+    "prompt": "Vídeo estilo review rápida",
+    "schedule": "20:00 UTC",
+    "voice_id": "antoni_eleven_labs"
+  },
+  "auth": "Bearer AUTOFLOW_SECURE_TOKEN"
+}
+</pre>
+            </div>
+        </div>
+        <p style="margin-top: 30px; color: #555; font-size: 0.9rem;">Instalamos un plugin puente en tu WordPress que envía estas señales a n8n automáticamente.</p>
+    </section>
+
+    <footer>
+        <div>
+            <div class="footer-logo">AUTO<span>FLOW</span></div>
+            <p style="color: #555; font-size: 0.8rem;">Líderes en automatización de sistemas de atención y medios. Construyendo el futuro de la economía de creadores.</p>
+        </div>
+        <div>
+            <h5>Soluciones</h5>
+            <ul>
+                <li><a href="#">Automatización B2B</a></li>
+                <li><a href="#">Canales Faceless</a></li>
+                <li><a href="#">API Direct Post</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5>Recursos</h5>
+            <ul>
+                <li><a href="#">Documentación n8n</a></li>
+                <li><a href="#">Blog de IA</a></li>
+                <li><a href="#">Casos de Éxito</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5>Legal</h5>
+            <ul>
+                <li><a href="#">Términos de Servicio</a></li>
+                <li><a href="#">Protección de Datos</a></li>
+                <li><a href="#">Política de Cookies</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Animaciones simples para los nodos
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.node-box, .detail-card, .code-window').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "0.6s ease-out";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
